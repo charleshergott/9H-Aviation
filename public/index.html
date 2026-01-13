@@ -244,6 +244,45 @@
         }
 
         /* Aircraft Section */
+
+        /* Slider Navigation Buttons */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(26, 60, 139, 0.8);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background: var(--primary-blue);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-btn-prev {
+            left: 20px;
+        }
+
+        .slider-btn-next {
+            right: 20px;
+        }
+
+        /* Make sure the slider container has position relative */
+        .aircraft-slider {
+            position: relative;
+        }
+
         .aircraft-slider {
             position: relative;
             max-width: 900px;
@@ -270,10 +309,6 @@
         }
 
         .slide-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
             background: rgba(26, 60, 139, 0.85);
             color: white;
             padding: 20px;
@@ -288,6 +323,7 @@
             display: flex;
             justify-content: center;
             margin-top: 20px;
+            margin-bottom: 20px;
             gap: 10px;
         }
 
@@ -746,7 +782,7 @@
             </div>
             <div class="copyright">
                 <p>&copy; 2026 9H Aviation Malta. All rights reserved. | Specialized STOL Aircraft Leasing for AOC
-                    Holders | site v.3.120126</p>
+                    Holders | site v.4.130126</p>
             </div>
         </div>
     </footer>
@@ -799,6 +835,36 @@
             });
         });
 
+        // Create and add navigation buttons
+        const prevBtn = document.createElement('button');
+        const nextBtn = document.createElement('button');
+
+        prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+
+        prevBtn.className = 'slider-btn slider-btn-prev';
+        nextBtn.className = 'slider-btn slider-btn-next';
+
+        // Add buttons to the slider
+        sliderContainer.parentNode.insertBefore(prevBtn, sliderContainer);
+        sliderContainer.parentNode.insertBefore(nextBtn, sliderContainer.nextSibling);
+
+        // Set up slider navigation dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+            });
+        });
+
+        // Set up button click events
+        prevBtn.addEventListener('click', () => {
+            goToSlide(currentSlide - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            goToSlide(currentSlide + 1);
+        });
+
         function goToSlide(slideIndex) {
             if (slideIndex < 0) slideIndex = slides.length - 1;
             if (slideIndex >= slides.length) slideIndex = 0;
@@ -811,11 +877,6 @@
 
             currentSlide = slideIndex;
         }
-
-        // Auto slide every 5 seconds
-        setInterval(() => {
-            goToSlide(currentSlide + 1);
-        }, 5000);
 
         // Form submission
         const inquiryForm = document.getElementById('inquiryForm');
