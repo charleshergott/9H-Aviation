@@ -166,21 +166,42 @@
 
         /* Hero Section */
         .hero {
+            position: relative;
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('DHC6.jpg');
-            background-size: cover;
-            background-position: center;
+            overflow: hidden;
             display: flex;
             align-items: center;
-            text-align: center;
-            color: white;
         }
 
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        /* dark overlay */
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.15));
+            z-index: -1;
+        }
+
+
+
         .hero-content {
+            position: relative;
+            color: white;
+            text-align: center;
             max-width: 800px;
             margin: 0 auto;
         }
+
+
 
         .hero h1 {
             font-size: 3.5rem;
@@ -420,6 +441,44 @@
             resize: vertical;
         }
 
+        .btn-send {
+            background: transparent;
+            color: #494747;
+            border: 2px solid #9E1827;
+            padding: 14px 48px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition:
+                background 0.25s ease,
+                color 0.25s ease,
+                transform 0.15s ease,
+                box-shadow 0.15s ease;
+        }
+
+        /* hover */
+        .btn-send:hover {
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            transform: translateY(-1px);
+        }
+
+        /* active (press) */
+        .btn-send:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* accessibility */
+        .btn-send:focus-visible {
+            outline: 2px solid #ffffff;
+            outline-offset: 4px;
+        }
+
+
         /* Footer */
         footer {
             background-color: var(--primary-blue);
@@ -597,17 +656,25 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <picture>
+            <source srcset="DHC6.jpg" media="(min-width: 768px)">
+            <img src="DHC6.jpg" alt="" class="hero-bg" fetchpriority="high" loading="eager" decoding="async">
+        </picture>
+
         <div class="container hero-content">
             <h1>Specialized STOL Aircraft Leasing</h1>
-            <p>Based in Malta, 9H Aviation provides premium B2B aircraft leasing solutions with a
+            <p>
+                Based in Malta, 9H Aviation provides premium B2B aircraft leasing solutions with a
                 strong focus on STOL aircraft for special missions, island hopping, sea planes, and challenging
-                environments.</p>
+                environments.
+            </p>
             <div class="hero-btns">
                 <a href="#contact" class="btn">Request a Quote</a>
                 <a href="#aircraft" class="btn btn-secondary">Our Aircraft Fleet</a>
             </div>
         </div>
     </section>
+
 
     <!-- Specialties Section -->
     <section class="section" id="specialties">
@@ -737,7 +804,7 @@
             </div>
             <div class="contact-container">
                 <div class="contact-info">
-                    <h3>9H Aviation Malta</h3>
+                    <h3>9H Aviation</h3>
                     <p>Specializing in STOL aircraft leasing worldwide. Based in Malta, we serve clients
                         across Europe, Africa, and the Middle East.</p>
                     <div class="contact-details">
@@ -787,14 +854,12 @@
                         <div>
                             <input type="text" name="comments" class="message-box" placeholder="Message" required />
                         </div>
-                        <div class="d-flex ">
-                            <button>
+                        <div class="d-flex">
+                            <button type="submit" class="btn-send">
                                 SEND
                             </button>
                         </div>
-
                     </form>
-
                 </div>
             </div>
         </div>
@@ -804,7 +869,7 @@
     <footer>
         <div class="container">
             <div class="footer-container">
-                <div class="footer-logo">9H <span>Aviation</span></div>
+                <div class="logo-text">9H <span>Aviation</span></div>
                 <div class="footer-links">
                     <a href="#home">Home</a>
                     <a href="#specialties">Specialties</a>
@@ -814,8 +879,8 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2026 9H Aviation Malta. All rights reserved. | Specialized STOL Aircraft Leasing
-                    Holders | site v.9.180126</p>
+                <p>&copy; 2026 9H Aviation. All rights reserved. | Specialized STOL Aircraft Leasing
+                    | site v.11.180126</p>
             </div>
         </div>
     </footer>
