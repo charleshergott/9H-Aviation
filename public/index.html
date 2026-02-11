@@ -20,9 +20,20 @@
                 <img src="Logo_2.jpg" alt="9H Aviation Logo" class="logo-img">
                 <div class="logo-text">9H <span>Aviation</span></div>
             </div>
+
+            <!-- Collaboration section -->
+            <div class="collaboration">
+                <span class="collab-text">in collaboration with</span>
+                <div class="nordic-sky-logo">
+                    <!-- Add Nordic Sky logo here -->
+                    <img src="NS-logo.png" alt="Nordic Sky AOC Holder" class="partner-logo">
+                </div>
+            </div>
+
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
+
             <nav id="mainNav">
                 <ul>
                     <li><a href="#home">Home</a></li>
@@ -52,6 +63,9 @@
             <div class="hero-btns">
                 <a href="#contact" class="btn">Request a Quote</a>
                 <a href="#aircraft" class="btn btn-secondary">Our Aircraft Fleet</a>
+                <!-- <a href="#" class="btn btn-booking booking-trigger">
+                    <i class="fas fa-calendar-check"></i> Check Availability & Book
+                </a> -->
             </div>
         </div>
     </section>
@@ -316,6 +330,272 @@
             </div>
         </div>
     </footer>
+
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="booking-modal-content booking-content">
+            <button class="close-modal">&times;</button>
+
+            <!-- <div class="booking-header">
+                <h2><i class="fas fa-plane"></i> Aircraft Booking Request</h2>
+                <p>Check availability and request booking for your preferred aircraft</p>
+            </div> -->
+
+            <form id="bookingForm">
+                <!-- Step 1: Aircraft Selection -->
+                <div class="booking-step active" id="step1">
+                    <h3>1. Select Aircraft</h3>
+                    <div class="aircraft-options">
+                        <div class="aircraft-option" data-aircraft="DHC6-400-MSN925">
+                            <div class="aircraft-img">
+                                <img src="925_1.jpg" alt="Twin Otter MSN 925">
+                            </div>
+                            <div class="aircraft-info">
+                                <h4>Twin Otter MSN 925</h4>
+                                <p><i class="fas fa-cogs"></i> PT6A-34 Engines</p>
+                                <p><i class="fas fa-users"></i> 19 Passenger</p>
+                                <p><i class="fas fa-ruler-combined"></i> STOL Specialist</p>
+                            </div>
+                            <div class="aircraft-check">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+
+                        <div class="aircraft-option" data-aircraft="DHC6-400-MSN938">
+                            <div class="aircraft-img">
+                                <img src="938_1.png" alt="Twin Otter MSN 938">
+                            </div>
+                            <div class="aircraft-info">
+                                <h4>Twin Otter MSN 938</h4>
+                                <p><i class="fas fa-cogs"></i> PT6A-34 Engines</p>
+                                <p><i class="fas fa-users"></i> 19 Passenger</p>
+                                <p><i class="fas fa-ruler-combined"></i> Low TTSN: 27</p>
+                            </div>
+                            <div class="aircraft-check">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booking-navigation">
+                        <button type="button" class="btn btn-next" data-next="step2">
+                            Next: Select Dates <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Date Selection -->
+                <div class="booking-step" id="step2">
+                    <h3>2. Select Dates</h3>
+
+                    <div class="date-selection">
+                        <div class="date-inputs">
+                            <div class="form-group">
+                                <label for="startDate"><i class="fas fa-plane-departure"></i> Start Date</label>
+                                <input type="date" id="startDate" required min="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="endDate"><i class="fas fa-plane-arrival"></i> End Date</label>
+                                <input type="date" id="endDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="leaseType">Lease Type</label>
+                                <select id="leaseType">
+                                    <option value="dry">Dry Lease</option>
+                                    <option value="wet">Wet Lease (Crew + Maintenance)</option>
+                                    <option value="acmi">ACMI (Aircraft, Crew, Maintenance, Insurance)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Calendar Display -->
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <button type="button" class="calendar-nav" id="prevMonth">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <h4 id="currentMonth">March 2024</h4>
+                                <button type="button" class="calendar-nav" id="nextMonth">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="calendar-grid" id="calendarGrid">
+                                <!-- Calendar will be generated by JavaScript -->
+                            </div>
+                            <div class="calendar-legend">
+                                <div class="legend-item">
+                                    <span class="legend-available"></span> Available
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-booked"></span> Booked
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-selected"></span> Selected
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booking-navigation">
+                        <button type="button" class="btn btn-prev" data-prev="step1">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-next" data-next="step3">
+                            Next: Contact Details <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Contact & Details -->
+                <div class="booking-step" id="step3">
+                    <h3>3. Your Details</h3>
+
+                    <div class="contact-details-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" placeholder="Optional">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone *</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="missionType">Mission Type</label>
+                            <select id="missionType">
+                                <option value="">Select mission type</option>
+                                <option value="passenger">Passenger Transport</option>
+                                <option value="cargo">Cargo Operations</option>
+                                <option value="medevac">Medical Evacuation</option>
+                                <option value="surveillance">Surveillance</option>
+                                <option value="training">Training</option>
+                                <option value="other">Other Special Mission</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="additionalInfo">Additional Requirements</label>
+                            <textarea id="additionalInfo" rows="4"
+                                placeholder="Any specific configuration, equipment needs, crew requirements, etc."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="terms" required>
+                                <label for="terms">
+                                    I agree to the <a href="#" class="terms-link">terms and conditions</a> and
+                                    understand
+                                    this is a booking request, not a confirmed booking.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booking-navigation">
+                        <button type="button" class="btn btn-prev" data-prev="step2">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="submit" class="btn btn-submit">
+                            <i class="fas fa-paper-plane"></i> Submit Booking Request
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="booking-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-steps">
+                        <span class="progress-step active">Aircraft</span>
+                        <span class="progress-step">Dates</span>
+                        <span class="progress-step">Details</span>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Summary Sidebar -->
+            <div class="booking-summary" id="bookingSummary">
+                <h3><i class="fas fa-file-alt"></i> Booking Summary</h3>
+                <div class="summary-content">
+                    <div class="summary-item">
+                        <strong>Aircraft:</strong>
+                        <span id="summaryAircraft">Not selected</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Dates:</strong>
+                        <span id="summaryDates">Not selected</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Lease Type:</strong>
+                        <span id="summaryLease">Not selected</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Duration:</strong>
+                        <span id="summaryDuration">0 days</span>
+                    </div>
+                    <div class="summary-item total">
+                        <strong>Request ID:</strong>
+                        <span id="summaryId">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal success-modal">
+        <div class="modal-content success-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Booking Request Submitted!</h2>
+            <p>Thank you for your booking request. We've received the following details:</p>
+
+            <div class="success-details">
+                <div class="detail-item">
+                    <strong>Request ID:</strong> <span id="successId">--</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Aircraft:</strong> <span id="successAircraft">--</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Dates:</strong> <span id="successDates">--</span>
+                </div>
+            </div>
+
+            <p class="success-message">
+                Our team will review your request and contact you within 24 hours to confirm availability and discuss
+                next
+                steps.
+            </p>
+
+            <div class="success-actions">
+                <button class="btn btn-close-success">Close</button>
+            </div>
+        </div>
+    </div>
     <script src="./js/main.js"></script>
 </body>
 
