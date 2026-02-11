@@ -268,6 +268,9 @@ function setupModalEvents() {
 
 // ===== FORM FUNCTIONS =====
 
+const FIRST_AVAILABLE_DATE = '2026-06-01'; // June 1, 2026
+const lastAvailableDate = '2027-12-31'; // Optional: set an end date too
+
 function setupFormEvents() {
     // Aircraft selection
     aircraftOptions.forEach(option => {
@@ -281,15 +284,25 @@ function setupFormEvents() {
 
     // Date inputs
     const today = new Date().toISOString().split('T')[0];
+    const firstAvailable = FIRST_AVAILABLE_DATE;
+
     if (startDateInput) {
-        startDateInput.min = today;
-        startDateInput.value = today;
-        startDate = today;
+        // Set minimum to first available date
+        startDateInput.min = firstAvailable;
+        startDateInput.value = firstAvailable; // Default to first available date
+        startDate = firstAvailable;
 
         startDateInput.addEventListener('change', (e) => {
             startDate = e.target.value;
             if (startDate) {
-                if (endDateInput) endDateInput.min = startDate;
+                if (endDateInput) {
+                    endDateInput.min = startDate;
+                    // Also ensure end date is not before first available
+                    if (endDateInput.value && endDateInput.value < startDate) {
+                        endDateInput.value = startDate;
+                        endDate = startDate;
+                    }
+                }
                 renderCalendar();
                 updateSummary();
             }
@@ -297,6 +310,9 @@ function setupFormEvents() {
     }
 
     if (endDateInput) {
+        endDateInput.min = firstAvailable;
+        endDateInput.value = firstAvailable; // Default to same as start
+
         endDateInput.addEventListener('change', (e) => {
             endDate = e.target.value;
             if (endDate) {
@@ -382,6 +398,7 @@ function renderCalendar() {
 
     const year = calendarDate.getFullYear();
     const month = calendarDate.getMonth();
+    const firstAvailableDate = new Date(FIRST_AVAILABLE_DATE);
 
     // Update month header
     currentMonthEl.textContent = calendarDate.toLocaleDateString('en-US', {
@@ -422,23 +439,26 @@ function renderCalendar() {
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const dateObj = new Date(year, month, day);
 
+        // Check if date is before June 1, 2026
+        const isBeforeAvailable = dateObj < firstAvailableDate;
+
         let isBooked = false;
-        if (selectedAircraft && aircraftData[selectedAircraft]) {
+        if (!isBeforeAvailable && selectedAircraft && aircraftData[selectedAircraft]) {
             isBooked = aircraftData[selectedAircraft].bookedDates.includes(dateStr);
         }
 
         const isToday = dateStr === today;
         const isSelected = isDateSelected(dateStr);
         const isInRange = isDateInRange(dateStr);
-        const isPast = new Date(dateStr) < new Date(today);
 
-        const dayEl = createCalendarDay(day, isPast, 'current', {
+        const dayEl = createCalendarDay(day, isBeforeAvailable, 'current', {
             dateStr,
             dateObj,
             isBooked,
             isToday,
             isSelected,
-            isInRange
+            isInRange,
+            isBeforeAvailable
         });
 
         calendarGrid.appendChild(dayEl);
@@ -458,8 +478,13 @@ function createCalendarDay(day, isDisabled, monthType = 'current', options = {})
     dayEl.className = 'calendar-day';
     dayEl.textContent = day;
 
-    if (isDisabled) {
+    const { isBeforeAvailable } = options;
+
+    if (isDisabled || isBeforeAvailable) {
         dayEl.classList.add('disabled');
+        if (isBeforeAvailable) {
+            dayEl.title = 'Available from June 1, 2026';
+        }
         return dayEl;
     }
 
@@ -513,6 +538,16 @@ function isDateInRange(dateStr) {
 }
 
 function handleDateClick(dateStr) {
+    const clickedDate = new Date(dateStr);
+    const firstAvailableDate = new Date(FIRST_AVAILABLE_DATE);
+
+    // Don't allow selection before June 1, 2026
+    if (clickedDate < firstAvailableDate) {
+        alert(`Aircraft available for booking from June 1, 2026 only. Please select dates after ${formatDate(FIRST_AVAILABLE_DATE)}.`);
+        return;
+    }
+
+    // Rest of existing code...
     if (!startDate || (startDate && endDate)) {
         startDate = dateStr;
         endDate = null;
@@ -673,6 +708,16 @@ function validateForm() {
                 return false;
             }
         }
+    }
+
+    // Add check for availability start date
+    const firstAvailable = new Date(FIRST_AVAILABLE_DATE);
+    const selectedStart = new Date(startDate);
+
+    if (selectedStart < firstAvailable) {
+        alert(`Aircraft available for booking from June 1, 2026 only. Please select dates after ${formatDate(FIRST_AVAILABLE_DATE)}.`);
+        goToStep(2);
+        return false;
     }
 
     // Check required fields
