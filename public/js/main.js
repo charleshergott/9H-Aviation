@@ -41,6 +41,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Aircraft Slider
 const sliderContainer = document.getElementById('sliderContainer');
 const sliderDots = document.querySelectorAll('.slider-dot');
+const prevBtn = document.getElementById('prevSlide');
+const nextBtn = document.getElementById('nextSlide');
 let currentSlide = 0;
 
 function showSlide(index) {
@@ -49,6 +51,9 @@ function showSlide(index) {
     const slides = sliderContainer.querySelectorAll('.slide');
     const totalSlides = slides.length;
 
+    if (totalSlides === 0) return;
+
+    // Wrap around
     if (index >= totalSlides) index = 0;
     if (index < 0) index = totalSlides - 1;
 
@@ -63,16 +68,37 @@ function showSlide(index) {
 
 // Initialize slider if it exists
 if (sliderContainer && sliderDots.length > 0) {
-    // Auto slide every 5 seconds
-    setInterval(() => {
-        showSlide(currentSlide + 1);
-    }, 5000);
+    // Show first slide
+    showSlide(0);
+
+    // Previous button click
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+    }
+
+    // Next button click
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+    }
 
     // Dot click events
     sliderDots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
             showSlide(index);
         });
+    });
+
+    // Optional: Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            showSlide(currentSlide - 1);
+        } else if (e.key === 'ArrowRight') {
+            showSlide(currentSlide + 1);
+        }
     });
 }
 

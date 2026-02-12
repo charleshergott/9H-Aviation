@@ -49,7 +49,9 @@
     <section class="hero" id="home">
         <picture>
             <source srcset="DHC6.png" media="(min-width: 768px)">
-            <img src="DHC6.png" alt="" class="hero-bg" fetchpriority="high" loading="eager" decoding="async">
+            <source srcset="DHC6bis.png" media="(max-width: 767px)">
+            <img src="DHC6.png" alt="DHC-6 Twin Otter aircraft" class="hero-bg" fetchpriority="high" loading="eager"
+                decoding="async">
         </picture>
 
         <div class="container hero-content">
@@ -105,41 +107,50 @@
     <section class="section" id="aircraft">
         <div class="container">
             <div class="section-title">
-                <h2>Our Featured Aircraft</h2>
-                <p>Our fleet includes some of the most versatile STOL aircraft in the industry, ready for demanding
-                    operations.</p>
+                <h2>Our Aircraft</h2>
+                <p>Our small fleet comprises the legendary Twin Otter aircraft.</p>
             </div>
             <div class="aircraft-slider">
-                <div class="slider-container" id="sliderContainer">
-                    <div class="slide">
-                        <img src="925_1.jpg" alt="Twin Otter MSN 925" class="logo-img">
-                        <div class="slide-info">
-                            <h3>2015 De Havilland Canada DHC6-400 Twin Otter MSN 925 (TTSN 59)</h3>
-                            <p>The ultimate STOL workhorse with exceptional short-field performance and reliability.<br>
-                                Equipped with Honeywell Avionics and PT6A-34 Engines</p>
+                <div class="slider-wrapper">
+                    <div class="slider-container" id="sliderContainer">
+                        <div class="slide">
+                            <img src="925_1.jpg" alt="Twin Otter MSN 925" class="logo-img">
+                            <div class="slide-info">
+                                <h3>2015 De Havilland Canada DHC6-400 Twin Otter MSN 925 (TTSN 59)</h3>
+                                <p>The ultimate STOL workhorse with exceptional short-field performance and
+                                    reliability.<br>
+                                    Equipped with Honeywell Avionics and PT6A-34 Engines</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="938_1.png" alt="Twin Otter MSN 938" class="logo-img">
+                            <div class="slide-info">
+                                <h3>2016 De Havilland Canada DHC-6 Twin Otter MSN 938 (TTSN 27)</h3>
+                                <p>The ultimate STOL workhorse with exceptional short-field performance and
+                                    reliability.<br>
+                                    Equipped with Honeywell Avionics and PT6A-34 Engines</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="slide">
-                        <img src="938_1.png" alt="Twin Otter MSN 938" class="logo-img">
-                        <div class="slide-info">
-                            <h3>2016 De Havilland Canada DHC-6 Twin Otter MSN 938 (TTSN 27)</h3>
-                            <p>The ultimate STOL workhorse with exceptional short-field performance and reliability.<br>
-                                Equipped with Honeywell Avionics and PT6A-34 Engines</p>
-                        </div>
-                    </div>
-                    <!-- <div class="slide">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                            alt="Seaplane">
-                        <div class="slide-info">
-                            <h3>Viking Air DHC-3T Turbo Otter</h3>
-                            <p>Amphibious floatplane with outstanding water and short-field landing performance.</p>
-                        </div>
-                    </div> -->
+
+                    <!-- Navigation arrows -->
+                    <button class="slider-btn slider-btn-prev" id="prevSlide" aria-label="Previous slide">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <button class="slider-btn slider-btn-next" id="nextSlide" aria-label="Next slide">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
                 </div>
+
                 <div class="slider-nav" id="sliderNav">
                     <div class="slider-dot active"></div>
                     <div class="slider-dot"></div>
-                    <!-- <div class="slider-dot"></div> -->
                 </div>
             </div>
         </div>
