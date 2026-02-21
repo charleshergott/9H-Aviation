@@ -553,6 +553,17 @@ nav ul li a:hover {
     width: 30px;
 }
 
+.blinkshare-logo-wrapper {
+    width: 30px;
+
+
+}
+
+.blinkshare-logo {
+    width: 25px;
+    height: 25px;
+}
+
 .contact-form input,
 .contact-form textarea {
     width: 100%;
