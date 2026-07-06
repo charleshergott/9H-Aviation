@@ -1,0 +1,351 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+    background-color: #f9fafc;
+    color: #1a2a3f;
+    line-height: 1.5;
+}
+
+/* header styling (consistent with main) */
+header {
+    background: #0b1a2e;
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    height: 48px;
+    width: auto;
+}
+
+.logo-text {
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo-text span {
+    color: #3b82f6;
+}
+
+.collaboration {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 6px 14px;
+    border-radius: 40px;
+}
+
+.collab-text {
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.partner-logo {
+    height: 36px;
+    width: auto;
+}
+
+nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: #3b82f6;
+}
+
+/* page header */
+.page-header {
+    background: linear-gradient(135deg, #0b2b3f 0%, #0a1c2c 100%);
+    color: white;
+    padding: 3rem 0 2.5rem;
+    border-bottom: 3px solid #3b82f6;
+}
+
+.page-header h1 {
+    font-size: 2.6rem;
+    margin-bottom: 0.75rem;
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 800px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #9bc5ff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link i {
+    margin-right: 6px;
+}
+
+/* main content grid */
+.services-detail-section {
+    padding: 4rem 0;
+}
+
+.section-intro {
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 3rem;
+}
+
+.section-intro h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: #0b2a3e;
+}
+
+.section-intro p {
+    color: #2c4c6e;
+    font-size: 1.1rem;
+}
+
+/* service cards grid */
+.services-grid-detailed {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.service-card-detailed {
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s;
+    border: 1px solid #eef2f8;
+}
+
+.service-card-detailed:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 32px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background: #eef3fc;
+    padding: 1.5rem 1.8rem;
+    border-bottom: 2px solid #dce5f0;
+}
+
+.card-header i {
+    font-size: 2.5rem;
+    color: #1e6ec5;
+    margin-bottom: 0.75rem;
+}
+
+.card-header h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+}
+
+.price-tag {
+    display: inline-block;
+    background: #0b2a3e;
+    color: white;
+    padding: 4px 14px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
+
+.card-body {
+    padding: 1.5rem 1.8rem;
+}
+
+.card-body p {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.feature-list {
+    list-style: none;
+    margin: 1rem 0 0.5rem;
+}
+
+.feature-list li {
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.feature-list i.fa-check-circle {
+    color: #1f9a5e;
+    font-size: 1rem;
+}
+
+.btn-outline-service {
+    margin-top: 1.25rem;
+    display: inline-block;
+    background: transparent;
+    border: 1.5px solid #1e6ec5;
+    color: #1e6ec5;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn-outline-service:hover {
+    background: #1e6ec5;
+    color: white;
+}
+
+/* price highlight tables for AOC Management split */
+.price-badge-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 0.75rem 0 0.5rem;
+}
+
+.price-item {
+    background: #f0f4fa;
+    padding: 4px 12px;
+    border-radius: 32px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.price-item strong {
+    color: #0f5192;
+}
+
+/* leasing specific row (dry/wet) */
+.lease-types {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.lease-badge {
+    background: #eaf4ff;
+    border-radius: 30px;
+    padding: 5px 14px;
+    font-weight: 500;
+}
+
+hr {
+    margin: 1rem 0;
+    border-color: #e2e8f0;
+}
+
+.extra-cta {
+    background: #eef3fc;
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.btn-primary {
+    background: #1e6ec5;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #0f4f91;
+    transform: scale(1.01);
+}
+
+footer {
+    background: #0b1a2e;
+    color: #ccc;
+    padding: 2.5rem 0 1.5rem;
+    margin-top: 2rem;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-links a {
+    color: #ddd;
+    margin-left: 1.5rem;
+    text-decoration: none;
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+@media (max-width: 780px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.9rem;
+    }
+}
