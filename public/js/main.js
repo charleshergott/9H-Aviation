@@ -180,47 +180,47 @@ function initBookingSystem() {
 
 // ===== ADD BOOKING TRIGGERS =====
 
-function addBookingTriggers() {
-    console.log('Adding booking triggers...');
+// function addBookingTriggers() {
+//     console.log('Adding booking triggers...');
 
-    // Add to hero section
-    const heroBtns = document.querySelector('.hero-btns');
-    if (heroBtns) {
-        const bookingBtn = document.createElement('a');
-        bookingBtn.href = '#';
-        bookingBtn.className = 'btn btn-booking booking-trigger';
-        bookingBtn.innerHTML = '<i class="fas fa-calendar-check"></i> Check Availability & Book';
-        heroBtns.appendChild(bookingBtn);
-        console.log('Added button to hero section');
-    }
+//     // Add to hero section
+//     const heroBtns = document.querySelector('.hero-btns');
+//     if (heroBtns) {
+//         const bookingBtn = document.createElement('a');
+//         bookingBtn.href = '#';
+//         bookingBtn.className = 'btn btn-booking booking-trigger';
+//         bookingBtn.innerHTML = '<i class="fas fa-calendar-check"></i> Check Availability & Book';
+//         heroBtns.appendChild(bookingBtn);
+//         console.log('Added button to hero section');
+//     }
 
-    // Add to services section
-    const servicesSection = document.querySelector('.services-section');
-    if (servicesSection) {
-        const bookingCta = document.createElement('div');
-        bookingCta.className = 'booking-cta';
-        bookingCta.innerHTML = `
-            <div class="section-title" style="margin-top: 4rem;">
-                <h3>Ready to Book?</h3>
-                <p>Check aircraft availability and submit a booking request</p>
-                <a href="#" class="btn btn-booking booking-trigger">
-                    <i class="fas fa-plane"></i> Start Booking Process
-                </a>
-            </div>
-        `;
-        servicesSection.appendChild(bookingCta);
-        console.log('Added CTA to services section');
-    }
+//     // Add to services section
+//     const servicesSection = document.querySelector('.services-section');
+//     if (servicesSection) {
+//         const bookingCta = document.createElement('div');
+//         bookingCta.className = 'booking-cta';
+//         bookingCta.innerHTML = `
+//             <div class="section-title" style="margin-top: 4rem;">
+//                 <h3>Ready to Book?</h3>
+//                 <p>Check aircraft availability and submit a booking request</p>
+//                 <a href="#" class="btn btn-booking booking-trigger">
+//                     <i class="fas fa-plane"></i> Start Booking Process
+//                 </a>
+//             </div>
+//         `;
+//         servicesSection.appendChild(bookingCta);
+//         console.log('Added CTA to services section');
+//     }
 
-    // Add click events to all booking triggers
-    document.addEventListener('click', function (e) {
-        if (e.target.closest('.booking-trigger')) {
-            e.preventDefault();
-            console.log('Booking trigger clicked, opening modal...');
-            openBookingModal();
-        }
-    });
-}
+//     // Add click events to all booking triggers
+//     document.addEventListener('click', function (e) {
+//         if (e.target.closest('.booking-trigger')) {
+//             e.preventDefault();
+//             console.log('Booking trigger clicked, opening modal...');
+//             openBookingModal();
+//         }
+//     });
+// }
 
 // ===== MODAL FUNCTIONS =====
 
