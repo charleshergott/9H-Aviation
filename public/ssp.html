@@ -108,6 +108,13 @@
             margin: 20px 0 12px;
         }
 
+        h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin: 16px 0 8px;
+        }
+
         .subtitle {
             font-size: 1.1rem;
             color: var(--gray);
@@ -144,6 +151,12 @@
             background: rgba(148, 163, 184, 0.15);
             color: var(--gray);
             border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .badge-news {
+            background: rgba(45, 212, 191, 0.15);
+            color: var(--teal);
+            border: 1px solid rgba(45, 212, 191, 0.3);
         }
 
         table {
@@ -378,57 +391,54 @@
             font-family: 'Playfair Display', serif;
         }
 
-        .decision-tree {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin: 20px 0;
+        .quote-box {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.08), rgba(45, 212, 191, 0.02));
+            border-left: 4px solid var(--teal);
+            border-radius: 0 12px 12px 0;
+            padding: 20px 24px;
+            margin: 16px 0;
+            font-style: italic;
+            color: var(--white);
+            line-height: 1.7;
         }
 
-        .decision-node {
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-        }
-
-        .decision-node::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            border-radius: 12px 0 0 12px;
-        }
-
-        .node-a {
-            background: rgba(34, 197, 94, 0.05);
-        }
-
-        .node-a::before {
-            background: var(--green);
-        }
-
-        .node-b {
-            background: rgba(239, 68, 68, 0.05);
-        }
-
-        .node-b::before {
-            background: var(--red);
-        }
-
-        .rate-table th {
-            text-align: center;
-        }
-
-        .rate-table td {
-            text-align: center;
-        }
-
-        .rate-table td:first-child {
-            text-align: left;
+        .quote-box .attribution {
+            font-style: normal;
             font-weight: 600;
+            color: var(--teal);
+            margin-top: 12px;
+            font-size: 0.9rem;
+        }
+
+        .news-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .news-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .news-location {
+            color: var(--teal);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .press-img {
+            width: 100%;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            margin: 12px 0;
         }
 
         .final-cta {
@@ -504,7 +514,7 @@
     <div class="presentation">
         <div class="nav-bar">
             <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
-            <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">10</span></span>
+            <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">11</span></span>
             <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
         </div>
 
@@ -527,7 +537,73 @@
             </div>
         </div>
 
-        <!-- SLIDE 2: Three Paths Overview -->
+        <!-- SLIDE 2: Press Release -->
+        <div class="slide">
+            <div class="badge badge-news">Press Release</div>
+            <h2 style="margin-bottom:8px;">Aero Assets Asia Seals Landmark Acquisition</h2>
+            <div class="news-header">
+                <span class="news-date">November 29, 2025</span>
+                <span style="color:rgba(255,255,255,0.2);">|</span>
+                <span class="news-location">AERO Asia Airshow — Zhuhai, China</span>
+            </div>
+
+            <img src="https://images.squarespace-cdn.com/content/v1/6471f3e5e3f6a85ea0d8a2e8/1732870638321-8X7Q9M3P2L1K0J9I/IMG_20251129_140000.jpg"
+                alt="AERO Asia 2025 Signing Ceremony" class="press-img" onerror="this.style.display='none'">
+
+            <div class="grid-3" style="margin:20px 0;">
+                <div class="metric-card" style="text-align:center; padding:16px;">
+                    <div class="metric-value" style="font-size:1.6rem;">12</div>
+                    <div class="metric-label">Cessna Grand Caravan EX Amphibians</div>
+                </div>
+                <div class="metric-card" style="text-align:center; padding:16px;">
+                    <div class="metric-value" style="font-size:1.6rem;">Early 2026</div>
+                    <div class="metric-label">Phased Delivery Start</div>
+                </div>
+                <div class="metric-card" style="text-align:center; padding:16px;">
+                    <div class="metric-value" style="font-size:1.6rem;">AAA</div>
+                    <div class="metric-label">Aero Assets Asia</div>
+                </div>
+            </div>
+
+            <p style="color:var(--gray); line-height:1.7; margin:12px 0;">
+                Aero Assets Asia Pte. Ltd., Seaplane Asia's joint venture focused on aircraft asset management and
+                trading, signed a momentous aircraft purchase agreement for <strong style="color:var(--white);">twelve
+                    (12) Cessna Grand Caravan EX Amphibian</strong> aircraft with <strong
+                    style="color:var(--white);">Hainan Haizhi General Aviation</strong>, a subsidiary of Northern-Heli
+                Aviation Group China.
+            </p>
+
+            <p style="color:var(--gray); line-height:1.7; margin:12px 0;">
+                This landmark deal represents one of the largest single-tranche commitments for the renowned Cessna
+                Grand Caravan EX Amphibian in the Asia-Pacific region to date. The aircraft are equipped with <strong
+                    style="color:var(--white);">Wipline 8750 amphibious floats</strong>, offering unparalleled
+                connectivity across remote island resorts, coastal cities, and waterways.
+            </p>
+
+            <div class="quote-box">
+                "This landmark purchase of twelve Cessna Grand Caravan EX Amphibians is a watershed moment, not just for
+                Aero Assets Asia, but for the entire regional aviation sector."
+                <div class="attribution">— Dennis Keller, CEO of Seaplane Asia & Director of Aero Assets Asia</div>
+            </div>
+
+            <div class="quote-box">
+                "The selection of the Cessna Grand Caravan EX Amphibian was a rigorous technical decision, with a focus
+                on our existing and growing operation with Siam Seaplane in Thailand, Santai Seaplane in Indonesia,
+                Samra Seaplane in Cambodia and more to come."
+                <div class="attribution">— Fabrice Mouton, CTO of Seaplane Asia & Director of Aero Assets Asia</div>
+            </div>
+
+            <div
+                style="margin-top:20px; padding:16px; background:rgba(201,162,39,0.06); border-radius:10px; border:1px solid rgba(201,162,39,0.15);">
+                <p style="font-size:0.9rem; color:var(--gray);">
+                    <strong style="color:var(--gold-light);">Source:</strong> <a
+                        href="https://www.santaiseaplane.com/news/aero-assets-asia" target="_blank"
+                        style="color:var(--teal); text-decoration:none;">santaiseaplane.com/news/aero-assets-asia</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: Three Paths Overview -->
         <div class="slide">
             <h2>Three Strategic Paths</h2>
             <p style="color:var(--gray); margin-bottom:24px;">Halo's choice of risk-adjusted return profiles</p>
@@ -574,7 +650,7 @@
             </div>
         </div>
 
-        <!-- SLIDE 3: Path A Financials -->
+        <!-- SLIDE 4: Path A Financials -->
         <div class="slide">
             <div class="badge badge-recommended">Recommended Path</div>
             <h2>Path A: 5-Year Lease + Year 5 Acquisition @ 70%</h2>
@@ -653,7 +729,7 @@
             </div>
         </div>
 
-        <!-- SLIDE 4: Path B & C Comparison -->
+        <!-- SLIDE 5: Path B & C Comparison -->
         <div class="slide">
             <h2>Alternative Paths: B & C</h2>
 
@@ -724,7 +800,7 @@
             </div>
         </div>
 
-        <!-- SLIDE 5: Business Model & Revenue -->
+        <!-- SLIDE 6: Business Model & Revenue -->
         <div class="slide">
             <h2>SSP's Revenue Engine</h2>
             <p style="color:var(--gray); margin-bottom:20px;">Annual Revenue Scenarios (Per Aircraft @ $2,200/hr)</p>
@@ -789,7 +865,7 @@
             </table>
         </div>
 
-        <!-- SLIDE 6: Capital Accumulation -->
+        <!-- SLIDE 7: Capital Accumulation -->
         <div class="slide">
             <h2>Capital Accumulation Path to Acquisition</h2>
             <p style="color:var(--gray); margin-bottom:20px;">Path A — 5 Aircraft @ Conservative Utilization</p>
@@ -861,7 +937,7 @@
             </div>
         </div>
 
-        <!-- SLIDE 7: Deployment Timeline -->
+        <!-- SLIDE 8: Deployment Timeline -->
         <div class="slide">
             <h2>Deployment Timeline</h2>
             <p style="color:var(--gray); margin-bottom:24px;">Urgent Launch + Controlled Growth</p>
@@ -899,7 +975,7 @@
             </div>
         </div>
 
-        <!-- SLIDE 8: Security & Conditions -->
+        <!-- SLIDE 9: Security & Conditions -->
         <div class="slide">
             <h2>Security & Conditions</h2>
 
@@ -962,7 +1038,7 @@
             </div>
         </div>
 
-        <!-- SLIDE 9: Platform Win -->
+        <!-- SLIDE 10: Platform Win -->
         <div class="slide">
             <h2>The 10-Aircraft Platform Win</h2>
             <p style="color:var(--gray); margin-bottom:20px;">Why this beats one-off transactions</p>
@@ -1019,7 +1095,7 @@
             </div>
         </div>
 
-        <!-- SLIDE 10: Recommendation -->
+        <!-- SLIDE 11: Recommendation -->
         <div class="slide">
             <h2>HALO's Recommendation</h2>
 
