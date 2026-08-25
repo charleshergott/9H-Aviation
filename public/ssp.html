@@ -34,10 +34,127 @@
             overflow-x: hidden;
         }
 
+        /* PASSWORD OVERLAY */
+        #passwordOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #070f1c 0%, #0a1628 50%, #0d1f35 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #passwordOverlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .lock-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: var(--gold);
+        }
+
+        .lock-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .lock-subtitle {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+            text-align: center;
+            max-width: 320px;
+            line-height: 1.5;
+        }
+
+        .password-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 320px;
+            max-width: 90vw;
+        }
+
+        .password-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 10px;
+            padding: 14px 18px;
+            color: var(--white);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            text-align: center;
+            letter-spacing: 0.1em;
+        }
+
+        .password-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15);
+        }
+
+        .password-input::placeholder {
+            color: var(--gray);
+            letter-spacing: 0.05em;
+        }
+
+        .password-btn {
+            background: linear-gradient(135deg, var(--gold), #a88420);
+            color: var(--navy);
+            border: none;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .password-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.35);
+        }
+
+        .password-error {
+            color: var(--red);
+            font-size: 0.85rem;
+            text-align: center;
+            min-height: 20px;
+            font-weight: 500;
+        }
+
+        .password-hint {
+            color: rgba(148, 163, 184, 0.5);
+            font-size: 0.75rem;
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        /* PRESENTATION */
         .presentation {
             max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .presentation.unlocked {
+            opacity: 1;
         }
 
         .slide {
@@ -488,6 +605,10 @@
             .slide {
                 padding: 20px;
             }
+
+            .lock-title {
+                font-size: 1.5rem;
+            }
         }
 
         @media print {
@@ -501,6 +622,10 @@
                 display: none;
             }
 
+            #passwordOverlay {
+                display: none !important;
+            }
+
             body {
                 background: white;
                 color: black;
@@ -511,7 +636,23 @@
 </head>
 
 <body>
-    <div class="presentation">
+
+    <!-- PASSWORD OVERLAY -->
+    <div id="passwordOverlay">
+        <div class="lock-icon">🔒</div>
+        <div class="lock-title">Confidential</div>
+        <div class="lock-subtitle">This presentation is password protected. Please enter the access code to continue.
+        </div>
+        <div class="password-form">
+            <input type="password" id="passInput" class="password-input" placeholder="Enter passcode"
+                autocomplete="off">
+            <button class="password-btn" onclick="checkPassword()">Unlock Presentation</button>
+            <div class="password-error" id="passError"></div>
+        </div>
+
+    </div>
+
+    <div class="presentation" id="presentation">
         <div class="nav-bar">
             <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
             <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">11</span></span>
@@ -1152,6 +1293,35 @@
     </div>
 
     <script>
+        // ═══════════════════════════════════════════════════════════════
+        // PASSWORD PROTECTION
+        // Change the password below to whatever you want:
+        // ═══════════════════════════════════════════════════════════════
+        const CORRECT_PASSWORD = "halo2026";
+
+        function checkPassword() {
+            const input = document.getElementById('passInput').value.trim();
+            const error = document.getElementById('passError');
+            const overlay = document.getElementById('passwordOverlay');
+            const presentation = document.getElementById('presentation');
+
+            if (input === CORRECT_PASSWORD) {
+                overlay.classList.add('hidden');
+                presentation.classList.add('unlocked');
+                document.getElementById('passInput').value = '';
+                error.textContent = '';
+            } else {
+                error.textContent = 'Incorrect passcode. Please try again.';
+                document.getElementById('passInput').value = '';
+                document.getElementById('passInput').focus();
+            }
+        }
+
+        document.getElementById('passInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        // SLIDE NAVIGATION
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
