@@ -306,10 +306,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .aircraft-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-        }
+
 
         .card-header {
             background: var(--navy-lighter);
@@ -376,9 +373,7 @@
             transition: all 0.2s;
         }
 
-        .tab:hover {
-            color: var(--text);
-        }
+
 
         .tab.active {
             background: rgba(201, 162, 39, 0.1);
@@ -414,10 +409,7 @@
             color: inherit;
         }
 
-        .file-item:hover {
-            border-color: var(--accent);
-            background: var(--navy-lighter);
-        }
+
 
         .file-icon {
             width: 40px;
@@ -772,15 +764,20 @@
                         <div class="status-badge">For Sale</div>
                     </div>
                     <div class="card-body">
+                        <div class="tabs">
+                            <button class="tab active" onclick="switchTab(this, 'ac1-tech')">Technical</button>
+                            <button class="tab" onclick="switchTab(this, 'ac1-commercial')">Commercial</button>
+                            <button class="tab" onclick="switchTab(this, 'ac1-photos')">Photos</button>
+                        </div>
 
                         <div id="ac1-tech" class="tab-panel active">
                             <div class="file-list">
                                 <a href="./logbooks and documents/925/01 MSN_925-Airframe Log Book.pdf"
                                     class="file-item" download>
-                                    <div class="file-icon">📄</div>
+                                    <div class="file-icon">⚙️</div>
                                     <div class="file-info">
                                         <div class="file-name">Airframe Logbook</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; EASA / Transport Malta</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Airframe Logbook</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
@@ -789,7 +786,7 @@
                                     <div class="file-icon">🔧</div>
                                     <div class="file-info">
                                         <div class="file-name">Component Status</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Last updated: Aug 2026</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Component Status</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
@@ -798,95 +795,178 @@
                                     <div class="file-icon">⚙️</div>
                                     <div class="file-info">
                                         <div class="file-name">LH Engine Logbook</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; PT6A-34 / Honeywell</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; LH Engine Logbook</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
                                 <a href="./logbooks and documents/925/04 ENGINE 2-PCE-RB0887 Log Book.pdf"
                                     class="file-item" download>
-                                    <div class="file-icon">📡</div>
+                                    <div class="file-icon">⚙️</div>
                                     <div class="file-info">
                                         <div class="file-name">RH Engine Logbook</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Honeywell Suite</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; RH Engine Logbook</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
                                 <a href="./logbooks and documents/925/05 PROPELLER 1-BUA33359 Log Book.pdf"
                                     class="file-item" download>
-                                    <div class="file-icon">⚖️</div>
+                                    <div class="file-icon">⚙️</div>
                                     <div class="file-info">
                                         <div class="file-name">LH Propeller Logbook</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Current W&B</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; LH Propeller Logbook</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
                                 <a href="./logbooks and documents/925/06 PROPELLER 2-BUA33360 Log Book.pdf"
                                     class="file-item" download>
-                                    <div class="file-icon">⚖️</div>
+                                    <div class="file-icon">⚙️</div>
                                     <div class="file-info">
                                         <div class="file-name">RH Propeller Logbook</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Current W&B</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; RH Propeller Logbook</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
                                 <a href="./logbooks and documents/925/07 MSN_925 Airframe AD Status.pdf"
                                     class="file-item" download>
-                                    <div class="file-icon">⚖️</div>
+                                    <div class="file-icon">🔧</div>
                                     <div class="file-info">
                                         <div class="file-name">Airframe Status</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Current W&B</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Airframe Status</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
                                 <a href="./logbooks and documents/925/08 PCE-RB0886-Engine LH AD Status.pdf"
                                     class="file-item" download>
-                                    <div class="file-icon">⚖️</div>
+                                    <div class="file-icon">🔧</div>
                                     <div class="file-info">
                                         <div class="file-name">LH Engine Airworthiness Directive Status</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Current W&B</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; LH Engine Airworthiness Directive
+                                            Status</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
                                 <a href="./logbooks and documents/925/09 PCE-RB0887-Engine RH AD Status.pdf"
                                     class="file-item" download>
-                                    <div class="file-icon">⚖️</div>
+                                    <div class="file-icon">🔧</div>
                                     <div class="file-info">
                                         <div class="file-name">RH Engine Airworthiness Directive Status</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Current W&B</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; RH Engine Airworthiness Directive
+                                            Status</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
                                 <a href="./logbooks and documents/925/10 BUA33359 Propeller LH AD Status.pdf"
                                     class="file-item" download>
-                                    <div class="file-icon">⚖️</div>
+                                    <div class="file-icon">🔧</div>
                                     <div class="file-info">
                                         <div class="file-name">LH Prop Airworthiness Directive Status</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Current W&B</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; LH Prop Airworthiness Directive Status
+                                        </div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
                                 <a href="./logbooks and documents/925/11 BUA33360 Propeller RH AD Status.pdf"
                                     class="file-item" download>
-                                    <div class="file-icon">⚖️</div>
+                                    <div class="file-icon">🔧</div>
                                     <div class="file-info">
                                         <div class="file-name">RH Prop Airworthiness Directive Status</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Current W&B</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; RH Prop Airworthiness Directive Status
+                                        </div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
                             </div>
                         </div>
 
+                        <!-- <div id="ac1-commercial" class="tab-panel">
+                            <div class="file-list">
+                                <a href="files/msn925/Spec_Sheet.pdf" class="file-item" download>
+                                    <div class="file-icon">📋</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Aircraft Specification Sheet</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Overview & key figures</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Operating_Costs.pdf" class="file-item" download>
+                                    <div class="file-icon">💶</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Estimated Operating Costs</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Annual projection</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Lease_Sample.pdf" class="file-item" download>
+                                    <div class="file-icon">📑</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Sample Lease Agreement</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Redacted template</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Insurance_Summary.pdf" class="file-item" download>
+                                    <div class="file-icon">🛡️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Insurance & Liability Summary</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Coverage overview</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                            </div>
+                        </div> -->
+
                         <div id="ac1-photos" class="tab-panel">
                             <div class="photo-carousel" data-carousel="ac1">
                                 <div class="carousel-main">
-                                    <span class="carousel-counter">1 / 6</span>
-                                    <img src="files/msn925/photos/01.jpg" class="active" alt="MSN 925 Exterior">
-                                    <img src="files/msn925/photos/02.jpg" alt="MSN 925 Cockpit">
-                                    <img src="files/msn925/photos/03.jpg" alt="MSN 925 Cabin">
-                                    <img src="files/msn925/photos/04.jpg" alt="MSN 925 Engine">
-                                    <img src="files/msn925/photos/05.jpg" alt="MSN 925 Landing Gear">
-                                    <img src="files/msn925/photos/06.jpg" alt="MSN 925 Interior">
+                                    <span class="carousel-counter">1 / 48</span>
+                                    <img src="./pictures/925/925_1.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_2.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_3.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_4.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_5.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_6.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_7.jpg" class="active" alt="MSN 925 Cockpit Seat">
+                                    <img src="./pictures/925/925_8.jpg" class="active" alt="MSN 925 Cockpit Seat">
+                                    <img src="./pictures/925/925_9.jpg" class="active" alt="MSN 925 Avionics">
+                                    <img src="./pictures/925/925_10.jpg" class="active" alt="MSN 925 Avionics">
+                                    <img src="./pictures/925/925_11.jpg" class="active" alt="MSN 925 Avionics">
+                                    <img src="./pictures/925/925_12.jpg" class="active" alt="MSN 925 Avionics">
+                                    <img src="./pictures/925/925_13.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_14.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_15.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_16.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_17.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_18.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_19.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_20.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_21.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_22.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_23.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_25.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_26.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_27.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_28.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_29.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_30.jpg" class="active" alt="MSN 925 Detail">
+                                    <img src="./pictures/925/925_32.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_33.jpg" class="active" alt="MSN 925 Engine">
+                                    <img src="./pictures/925/925_34.jpg" class="active" alt="MSN 925 Engine">
+                                    <img src="./pictures/925/925_35.jpg" class="active" alt="MSN 925 Engine">
+                                    <img src="./pictures/925/925_36.jpg" class="active" alt="MSN 925 Engine">
+                                    <img src="./pictures/925/925_37.jpg" class="active" alt="MSN 925 Engine">
+                                    <img src="./pictures/925/925_38.jpg" class="active" alt="MSN 925 Engine">
+                                    <img src="./pictures/925/925_39.jpg" class="active" alt="MSN 925 Engine">
+                                    <img src="./pictures/925/925_40.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_41.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_42.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_43.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_44.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_45.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_46.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_47.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_48.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_49.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="./pictures/925/925_50.jpg" class="active" alt="MSN 925 Exterior">
                                     <button class="carousel-nav prev" onclick="carouselPrev('ac1')">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                                             stroke-linecap="round" stroke-linejoin="round">
@@ -910,22 +990,101 @@
                                 </div>
                                 <div class="carousel-thumbs">
                                     <div class="carousel-thumb active" onclick="carouselGoTo('ac1', 0)"><img
-                                            src="files/msn925/photos/01.jpg" alt=""></div>
+                                            src="./pictures/925/925_1.jpg" alt=""></div>
                                     <div class="carousel-thumb" onclick="carouselGoTo('ac1', 1)"><img
-                                            src="files/msn925/photos/02.jpg" alt="">
-                                    </div>
+                                            src="./pictures/925/925_2.jpg" alt=""></div>
                                     <div class="carousel-thumb" onclick="carouselGoTo('ac1', 2)"><img
-                                            src="files/msn925/photos/03.jpg" alt="">
-                                    </div>
+                                            src="./pictures/925/925_3.jpg" alt=""></div>
                                     <div class="carousel-thumb" onclick="carouselGoTo('ac1', 3)"><img
-                                            src="files/msn925/photos/04.jpg" alt="">
-                                    </div>
+                                            src="./pictures/925/925_4.jpg" alt=""></div>
                                     <div class="carousel-thumb" onclick="carouselGoTo('ac1', 4)"><img
-                                            src="files/msn925/photos/05.jpg" alt="">
-                                    </div>
+                                            src="./pictures/925/925_5.jpg" alt=""></div>
                                     <div class="carousel-thumb" onclick="carouselGoTo('ac1', 5)"><img
-                                            src="files/msn925/photos/06.jpg" alt="">
-                                    </div>
+                                            src="./pictures/925/925_6.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 6)"><img
+                                            src="./pictures/925/925_7.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 7)"><img
+                                            src="./pictures/925/925_8.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 8)"><img
+                                            src="./pictures/925/925_9.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 9)"><img
+                                            src="./pictures/925/925_10.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 10)"><img
+                                            src="./pictures/925/925_11.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 11)"><img
+                                            src="./pictures/925/925_12.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 12)"><img
+                                            src="./pictures/925/925_13.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 13)"><img
+                                            src="./pictures/925/925_14.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 14)"><img
+                                            src="./pictures/925/925_15.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 15)"><img
+                                            src="./pictures/925/925_16.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 16)"><img
+                                            src="./pictures/925/925_17.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 17)"><img
+                                            src="./pictures/925/925_18.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 18)"><img
+                                            src="./pictures/925/925_19.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 19)"><img
+                                            src="./pictures/925/925_20.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 20)"><img
+                                            src="./pictures/925/925_21.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 21)"><img
+                                            src="./pictures/925/925_22.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 22)"><img
+                                            src="./pictures/925/925_23.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 24)"><img
+                                            src="./pictures/925/925_25.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 25)"><img
+                                            src="./pictures/925/925_26.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 26)"><img
+                                            src="./pictures/925/925_27.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 27)"><img
+                                            src="./pictures/925/925_28.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 28)"><img
+                                            src="./pictures/925/925_29.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 29)"><img
+                                            src="./pictures/925/925_30.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 31)"><img
+                                            src="./pictures/925/925_32.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 32)"><img
+                                            src="./pictures/925/925_33.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 33)"><img
+                                            src="./pictures/925/925_34.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 34)"><img
+                                            src="./pictures/925/925_35.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 35)"><img
+                                            src="./pictures/925/925_36.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 36)"><img
+                                            src="./pictures/925/925_37.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 37)"><img
+                                            src="./pictures/925/925_38.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 38)"><img
+                                            src="./pictures/925/925_39.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 39)"><img
+                                            src="./pictures/925/925_40.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 40)"><img
+                                            src="./pictures/925/925_41.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 41)"><img
+                                            src="./pictures/925/925_42.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 42)"><img
+                                            src="./pictures/925/925_43.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 43)"><img
+                                            src="./pictures/925/925_44.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 44)"><img
+                                            src="./pictures/925/925_45.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 45)"><img
+                                            src="./pictures/925/925_46.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 46)"><img
+                                            src="./pictures/925/925_47.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 47)"><img
+                                            src="./pictures/925/925_48.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 48)"><img
+                                            src="./pictures/925/925_49.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 49)"><img
+                                            src="./pictures/925/925_50.jpg" alt=""></div>
                                 </div>
                             </div>
                             <a href="files/msn925/All_Photos.zip" class="file-item" download style="margin-top:8px;">
@@ -955,63 +1114,124 @@
                         <div class="tabs">
                             <button class="tab active" onclick="switchTab(this, 'ac2-tech')">Technical</button>
                             <button class="tab" onclick="switchTab(this, 'ac2-commercial')">Commercial</button>
+                            <button class="tab" onclick="switchTab(this, 'ac2-photos')">Photos</button>
                         </div>
 
                         <div id="ac2-tech" class="tab-panel active">
                             <div class="file-list">
-                                <a href="files/msn938/Type_Certificate.pdf" class="file-item" download>
+                                <a href="./logbooks and documents/938/06. 938-CERTIFICATE OF REGISTRATION_2023.pdf"
+                                    class="file-item" download>
                                     <div class="file-icon">📄</div>
                                     <div class="file-info">
-                                        <div class="file-name">Type Certificate & Specifications</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; EASA / Transport Malta</div>
+                                        <div class="file-name">Certificate of Registration (old)</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Certificate of Registration (old)</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
-                                <a href="files/msn938/Maintenance_Status.pdf" class="file-item" download>
+                                <a href="./logbooks and documents/938/10. Engine logbook entries 938.pdf"
+                                    class="file-item" download>
                                     <div class="file-icon">🔧</div>
                                     <div class="file-info">
-                                        <div class="file-name">Maintenance Status Report</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Last updated: Aug 2026</div>
+                                        <div class="file-name">Engine Log Book</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Engine Log Book</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
-                                <a href="files/msn938/Engine_Logs.pdf" class="file-item" download>
+                                <a href="./logbooks and documents/938/07. 938-HARTZELL_PROPELLER_LOGBOOK_BUA-33489[1].pdf"
+                                    class="file-item" download>
                                     <div class="file-icon">⚙️</div>
                                     <div class="file-info">
-                                        <div class="file-name">Engine & APU Log Summaries</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; PT6A-34 / Honeywell</div>
+                                        <div class="file-name">LH Propeller Log Book</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; LH Propeller Log Book</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
-                                <a href="files/msn938/Avionics_List.pdf" class="file-item" download>
+                                <a href="./logbooks and documents/938/08. 938-HARTZELL_PROPELLER_LOGBOOK_BUA-33534[1].pdf"
+                                    class="file-item" download>
                                     <div class="file-icon">📡</div>
                                     <div class="file-info">
-                                        <div class="file-name">Avionics Configuration</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Honeywell Suite</div>
+                                        <div class="file-name">RH Propeller Log Book</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; RH Propeller Log Book</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
-                                <a href="files/msn938/Weight_Balance.pdf" class="file-item" download>
+                                <a href="./logbooks and documents/938/02. 938-AIRCRAFT_JOURNEY_LOG[1].pdf"
+                                    class="file-item" download>
                                     <div class="file-icon">⚖️</div>
                                     <div class="file-info">
-                                        <div class="file-name">Weight & Balance Report</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Current W&B</div>
+                                        <div class="file-name">Aircraft Journey Log Book</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Aircraft Journey Log Book</div>
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
                             </div>
                         </div>
 
+                        <!-- <div id="ac2-commercial" class="tab-panel">
+                            <div class="file-list">
+                                <a href="files/msn938/Spec_Sheet.pdf" class="file-item" download>
+                                    <div class="file-icon">📋</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Aircraft Specification Sheet</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Overview & key figures</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Operating_Costs.pdf" class="file-item" download>
+                                    <div class="file-icon">💶</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Estimated Operating Costs</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Annual projection</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Lease_Sample.pdf" class="file-item" download>
+                                    <div class="file-icon">📑</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Sample Lease Agreement</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Redacted template</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Insurance_Summary.pdf" class="file-item" download>
+                                    <div class="file-icon">🛡️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Insurance & Liability Summary</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Coverage overview</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                            </div>
+                        </div> -->
+
                         <div id="ac2-photos" class="tab-panel">
                             <div class="photo-carousel" data-carousel="ac2">
                                 <div class="carousel-main">
-                                    <span class="carousel-counter">1 / 6</span>
-                                    <img src="files/msn938/photos/01.jpg" class="active" alt="MSN 938 Exterior">
-                                    <img src="files/msn938/photos/02.jpg" alt="MSN 938 Cockpit">
-                                    <img src="files/msn938/photos/03.jpg" alt="MSN 938 Cabin">
-                                    <img src="files/msn938/photos/04.jpg" alt="MSN 938 Engine">
-                                    <img src="files/msn938/photos/05.jpg" alt="MSN 938 Landing Gear">
-                                    <img src="files/msn938/photos/06.jpg" alt="MSN 938 Interior">
+                                    <span class="carousel-counter">1 / 24</span>
+                                    <img src="./pictures/938/938_1.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_3.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_5.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_6.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_7.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_8.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_9.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_10.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_12.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_14.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_15.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_16.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_17.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_18.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_20.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_22.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_23.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_24.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_25.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_26.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_27.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_28.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_29.jpeg" class="active" alt="MSN 938 Exterior">
+                                    <img src="./pictures/938/938_30.jpeg" class="active" alt="MSN 938 Exterior">
                                     <button class="carousel-nav prev" onclick="carouselPrev('ac2')">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                                             stroke-linecap="round" stroke-linejoin="round">
@@ -1035,22 +1255,53 @@
                                 </div>
                                 <div class="carousel-thumbs">
                                     <div class="carousel-thumb active" onclick="carouselGoTo('ac2', 0)"><img
-                                            src="files/msn938/photos/01.jpg" alt=""></div>
-                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 1)"><img
-                                            src="files/msn938/photos/02.jpg" alt="">
-                                    </div>
+                                            src="./pictures/938/938_1.jpeg" alt=""></div>
                                     <div class="carousel-thumb" onclick="carouselGoTo('ac2', 2)"><img
-                                            src="files/msn938/photos/03.jpg" alt="">
-                                    </div>
-                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 3)"><img
-                                            src="files/msn938/photos/04.jpg" alt="">
-                                    </div>
+                                            src="./pictures/938/938_3.jpeg" alt=""></div>
                                     <div class="carousel-thumb" onclick="carouselGoTo('ac2', 4)"><img
-                                            src="files/msn938/photos/05.jpg" alt="">
-                                    </div>
+                                            src="./pictures/938/938_5.jpeg" alt=""></div>
                                     <div class="carousel-thumb" onclick="carouselGoTo('ac2', 5)"><img
-                                            src="files/msn938/photos/06.jpg" alt="">
-                                    </div>
+                                            src="./pictures/938/938_6.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 6)"><img
+                                            src="./pictures/938/938_7.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 7)"><img
+                                            src="./pictures/938/938_8.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 8)"><img
+                                            src="./pictures/938/938_9.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 9)"><img
+                                            src="./pictures/938/938_10.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 11)"><img
+                                            src="./pictures/938/938_12.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 13)"><img
+                                            src="./pictures/938/938_14.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 14)"><img
+                                            src="./pictures/938/938_15.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 15)"><img
+                                            src="./pictures/938/938_16.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 16)"><img
+                                            src="./pictures/938/938_17.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 17)"><img
+                                            src="./pictures/938/938_18.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 19)"><img
+                                            src="./pictures/938/938_20.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 21)"><img
+                                            src="./pictures/938/938_22.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 22)"><img
+                                            src="./pictures/938/938_23.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 23)"><img
+                                            src="./pictures/938/938_24.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 24)"><img
+                                            src="./pictures/938/938_25.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 25)"><img
+                                            src="./pictures/938/938_26.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 26)"><img
+                                            src="./pictures/938/938_27.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 27)"><img
+                                            src="./pictures/938/938_28.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 28)"><img
+                                            src="./pictures/938/938_29.jpeg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 29)"><img
+                                            src="./pictures/938/938_30.jpeg" alt=""></div>
                                 </div>
                             </div>
                             <a href="files/msn938/All_Photos.zip" class="file-item" download style="margin-top:8px;">
@@ -1092,17 +1343,6 @@
         // ============================================================
         // FIREBASE CONFIGURATION
         // ============================================================
-        // 1. Go to https://console.firebase.google.com/
-        // 2. Create a new project (e.g., "9H-Aviation-Docs")
-        // 3. Add a Web App (</> icon) — copy the firebaseConfig object
-        // 4. Enable Email/Password provider:
-        //    Authentication → Sign-in method → Email/Password → Enable
-        // 5. Create users manually in:
-        //    Authentication → Users → Add user
-        //    (Or let buyers self-register and approve them)
-        // 6. Replace the placeholder config below with yours
-        // ============================================================
-
         const firebaseConfig = {
             apiKey: "AIzaSyDT8Dq2AXAlHYNUfXOP324wt0b1zoNXoPw",
             authDomain: "nine-h-aviation.firebaseapp.com",
@@ -1112,7 +1352,6 @@
             appId: "1:344438972950:web:e488b671637f977babcb37",
             measurementId: "G-2877M106T7"
         };
-
 
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
