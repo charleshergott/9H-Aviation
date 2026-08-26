@@ -457,6 +457,252 @@
             white-space: nowrap;
         }
 
+        /* ============================================
+           PHOTO CAROUSEL
+           ============================================ */
+        .photo-carousel {
+            position: relative;
+            background: var(--navy);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .carousel-main {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: #070d18;
+            overflow: hidden;
+        }
+
+        .carousel-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .carousel-main img.active {
+            opacity: 1;
+            position: relative;
+        }
+
+        .carousel-counter {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(10, 22, 40, 0.85);
+            color: var(--text);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            z-index: 5;
+            backdrop-filter: blur(4px);
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(10, 22, 40, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 5;
+            backdrop-filter: blur(4px);
+        }
+
+        .carousel-nav:hover {
+            background: var(--accent);
+            color: var(--navy);
+            border-color: var(--accent);
+        }
+
+        .carousel-nav.prev {
+            left: 12px;
+        }
+
+        .carousel-nav.next {
+            right: 12px;
+        }
+
+        .carousel-nav svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .carousel-thumbs {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        .carousel-thumbs::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .carousel-thumbs::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .carousel-thumb {
+            flex: 0 0 72px;
+            height: 48px;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            opacity: 0.6;
+        }
+
+        .carousel-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-thumb:hover {
+            opacity: 0.9;
+        }
+
+        .carousel-thumb.active {
+            border-color: var(--accent);
+            opacity: 1;
+        }
+
+        .carousel-fullscreen-btn {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            background: rgba(10, 22, 40, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 5;
+            backdrop-filter: blur(4px);
+        }
+
+        .carousel-fullscreen-btn:hover {
+            background: var(--accent);
+            color: var(--navy);
+        }
+
+        /* Fullscreen overlay */
+        .fs-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 10, 18, 0.98);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .fs-overlay.active {
+            display: flex;
+        }
+
+        .fs-overlay img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .fs-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: var(--navy-light);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.2s;
+        }
+
+        .fs-close:hover {
+            background: var(--accent);
+            color: var(--navy);
+        }
+
+        .fs-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--navy-light);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 20px;
+        }
+
+        .fs-nav:hover {
+            background: var(--accent);
+            color: var(--navy);
+        }
+
+        .fs-nav.prev {
+            left: 20px;
+        }
+
+        .fs-nav.next {
+            right: 20px;
+        }
+
+        .fs-counter {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--navy-light);
+            border: 1px solid var(--border);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
         footer {
             text-align: center;
             padding: 32px;
@@ -526,10 +772,6 @@
                         <div class="status-badge">For Sale</div>
                     </div>
                     <div class="card-body">
-                        <div class="tabs">
-                            <button class="tab active" onclick="switchTab(this, 'ac1-tech')">Technical</button>
-                            <button class="tab" onclick="switchTab(this, 'ac1-commercial')">Commercial</button>
-                        </div>
 
                         <div id="ac1-tech" class="tab-panel active">
                             <div class="file-list">
@@ -632,60 +874,68 @@
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
-                                <a href="./pictures/925/2025-02-12 16.29.30-1.jpg" class="file-item" download>
-                                    <div class="file-icon">🖼️</div>
-                                    <div class="file-info">
-                                        <div class="file-name">High-Res Interior Photos</div>
-                                        <div class="file-meta">ZIP &nbsp;•&nbsp; 24 images</div>
-                                    </div>
-                                    <div class="file-action">Download</div>
-                                </a>
-                                <a href="./pictures/925/2025-02-12 16.29.30-10.jpg" class="file-item" download>
-                                    <div class="file-icon">🖼️</div>
-                                    <div class="file-info">
-                                        <div class="file-name">High-Res Exterior Photos</div>
-                                        <div class="file-meta">ZIP &nbsp;•&nbsp; 36 images</div>
-                                    </div>
-                                    <div class="file-action">Download</div>
-                                </a>
                             </div>
                         </div>
 
-                        <div id="ac1-commercial" class="tab-panel">
-                            <div class="file-list">
-                                <a href="files/msn925/Spec_Sheet.pdf" class="file-item" download>
-                                    <div class="file-icon">📋</div>
-                                    <div class="file-info">
-                                        <div class="file-name">Aircraft Specification Sheet</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Overview & key figures</div>
+                        <div id="ac1-photos" class="tab-panel">
+                            <div class="photo-carousel" data-carousel="ac1">
+                                <div class="carousel-main">
+                                    <span class="carousel-counter">1 / 6</span>
+                                    <img src="files/msn925/photos/01.jpg" class="active" alt="MSN 925 Exterior">
+                                    <img src="files/msn925/photos/02.jpg" alt="MSN 925 Cockpit">
+                                    <img src="files/msn925/photos/03.jpg" alt="MSN 925 Cabin">
+                                    <img src="files/msn925/photos/04.jpg" alt="MSN 925 Engine">
+                                    <img src="files/msn925/photos/05.jpg" alt="MSN 925 Landing Gear">
+                                    <img src="files/msn925/photos/06.jpg" alt="MSN 925 Interior">
+                                    <button class="carousel-nav prev" onclick="carouselPrev('ac1')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M15 18l-6-6 6-6" />
+                                        </svg>
+                                    </button>
+                                    <button class="carousel-nav next" onclick="carouselNext('ac1')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M9 18l6-6-6-6" />
+                                        </svg>
+                                    </button>
+                                    <button class="carousel-fullscreen-btn" onclick="openFullscreen('ac1')">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path
+                                                d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="carousel-thumbs">
+                                    <div class="carousel-thumb active" onclick="carouselGoTo('ac1', 0)"><img
+                                            src="files/msn925/photos/01.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 1)"><img
+                                            src="files/msn925/photos/02.jpg" alt="">
                                     </div>
-                                    <div class="file-action">Download</div>
-                                </a>
-                                <a href="files/msn925/Operating_Costs.pdf" class="file-item" download>
-                                    <div class="file-icon">💶</div>
-                                    <div class="file-info">
-                                        <div class="file-name">Estimated Operating Costs</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Annual projection</div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 2)"><img
+                                            src="files/msn925/photos/03.jpg" alt="">
                                     </div>
-                                    <div class="file-action">Download</div>
-                                </a>
-                                <a href="files/msn925/Lease_Sample.pdf" class="file-item" download>
-                                    <div class="file-icon">📑</div>
-                                    <div class="file-info">
-                                        <div class="file-name">Sample Lease Agreement</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Redacted template</div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 3)"><img
+                                            src="files/msn925/photos/04.jpg" alt="">
                                     </div>
-                                    <div class="file-action">Download</div>
-                                </a>
-                                <a href="files/msn925/Insurance_Summary.pdf" class="file-item" download>
-                                    <div class="file-icon">🛡️</div>
-                                    <div class="file-info">
-                                        <div class="file-name">Insurance & Liability Summary</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Coverage overview</div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 4)"><img
+                                            src="files/msn925/photos/05.jpg" alt="">
                                     </div>
-                                    <div class="file-action">Download</div>
-                                </a>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac1', 5)"><img
+                                            src="files/msn925/photos/06.jpg" alt="">
+                                    </div>
+                                </div>
                             </div>
+                            <a href="files/msn925/All_Photos.zip" class="file-item" download style="margin-top:8px;">
+                                <div class="file-icon">🖼️</div>
+                                <div class="file-info">
+                                    <div class="file-name">Download All Photos (ZIP)</div>
+                                    <div class="file-meta">High-resolution pack</div>
+                                </div>
+                                <div class="file-action">Download</div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -749,60 +999,68 @@
                                     </div>
                                     <div class="file-action">Download</div>
                                 </a>
-                                <a href="files/msn938/Interior_Photos.zip" class="file-item" download>
-                                    <div class="file-icon">🖼️</div>
-                                    <div class="file-info">
-                                        <div class="file-name">High-Res Interior Photos</div>
-                                        <div class="file-meta">ZIP &nbsp;•&nbsp; 24 images</div>
-                                    </div>
-                                    <div class="file-action">Download</div>
-                                </a>
-                                <a href="files/msn938/Exterior_Photos.zip" class="file-item" download>
-                                    <div class="file-icon">🖼️</div>
-                                    <div class="file-info">
-                                        <div class="file-name">High-Res Exterior Photos</div>
-                                        <div class="file-meta">ZIP &nbsp;•&nbsp; 36 images</div>
-                                    </div>
-                                    <div class="file-action">Download</div>
-                                </a>
                             </div>
                         </div>
 
-                        <div id="ac2-commercial" class="tab-panel">
-                            <div class="file-list">
-                                <a href="files/msn938/Spec_Sheet.pdf" class="file-item" download>
-                                    <div class="file-icon">📋</div>
-                                    <div class="file-info">
-                                        <div class="file-name">Aircraft Specification Sheet</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Overview & key figures</div>
+                        <div id="ac2-photos" class="tab-panel">
+                            <div class="photo-carousel" data-carousel="ac2">
+                                <div class="carousel-main">
+                                    <span class="carousel-counter">1 / 6</span>
+                                    <img src="files/msn938/photos/01.jpg" class="active" alt="MSN 938 Exterior">
+                                    <img src="files/msn938/photos/02.jpg" alt="MSN 938 Cockpit">
+                                    <img src="files/msn938/photos/03.jpg" alt="MSN 938 Cabin">
+                                    <img src="files/msn938/photos/04.jpg" alt="MSN 938 Engine">
+                                    <img src="files/msn938/photos/05.jpg" alt="MSN 938 Landing Gear">
+                                    <img src="files/msn938/photos/06.jpg" alt="MSN 938 Interior">
+                                    <button class="carousel-nav prev" onclick="carouselPrev('ac2')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M15 18l-6-6 6-6" />
+                                        </svg>
+                                    </button>
+                                    <button class="carousel-nav next" onclick="carouselNext('ac2')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M9 18l6-6-6-6" />
+                                        </svg>
+                                    </button>
+                                    <button class="carousel-fullscreen-btn" onclick="openFullscreen('ac2')">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path
+                                                d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="carousel-thumbs">
+                                    <div class="carousel-thumb active" onclick="carouselGoTo('ac2', 0)"><img
+                                            src="files/msn938/photos/01.jpg" alt=""></div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 1)"><img
+                                            src="files/msn938/photos/02.jpg" alt="">
                                     </div>
-                                    <div class="file-action">Download</div>
-                                </a>
-                                <a href="files/msn938/Operating_Costs.pdf" class="file-item" download>
-                                    <div class="file-icon">💶</div>
-                                    <div class="file-info">
-                                        <div class="file-name">Estimated Operating Costs</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Annual projection</div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 2)"><img
+                                            src="files/msn938/photos/03.jpg" alt="">
                                     </div>
-                                    <div class="file-action">Download</div>
-                                </a>
-                                <a href="files/msn938/Lease_Sample.pdf" class="file-item" download>
-                                    <div class="file-icon">📑</div>
-                                    <div class="file-info">
-                                        <div class="file-name">Sample Lease Agreement</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Redacted template</div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 3)"><img
+                                            src="files/msn938/photos/04.jpg" alt="">
                                     </div>
-                                    <div class="file-action">Download</div>
-                                </a>
-                                <a href="files/msn938/Insurance_Summary.pdf" class="file-item" download>
-                                    <div class="file-icon">🛡️</div>
-                                    <div class="file-info">
-                                        <div class="file-name">Insurance & Liability Summary</div>
-                                        <div class="file-meta">PDF &nbsp;•&nbsp; Coverage overview</div>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 4)"><img
+                                            src="files/msn938/photos/05.jpg" alt="">
                                     </div>
-                                    <div class="file-action">Download</div>
-                                </a>
+                                    <div class="carousel-thumb" onclick="carouselGoTo('ac2', 5)"><img
+                                            src="files/msn938/photos/06.jpg" alt="">
+                                    </div>
+                                </div>
                             </div>
+                            <a href="files/msn938/All_Photos.zip" class="file-item" download style="margin-top:8px;">
+                                <div class="file-icon">🖼️</div>
+                                <div class="file-info">
+                                    <div class="file-name">Download All Photos (ZIP)</div>
+                                    <div class="file-meta">High-resolution pack</div>
+                                </div>
+                                <div class="file-action">Download</div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -815,6 +1073,15 @@
             For inquiries: <a href="mailto:sales@9haviation.com"
                 style="color: var(--accent); text-decoration: none;">sales@9haviation.com</a>
         </footer>
+    </div>
+
+    <!-- Fullscreen Overlay -->
+    <div class="fs-overlay" id="fsOverlay" onclick="closeFullscreen(event)">
+        <button class="fs-close" onclick="closeFullscreen()">&times;</button>
+        <button class="fs-nav prev" onclick="fsPrev(event)">&#10094;</button>
+        <img src="" alt="Fullscreen" id="fsImage">
+        <button class="fs-nav next" onclick="fsNext(event)">&#10095;</button>
+        <div class="fs-counter" id="fsCounter">1 / 6</div>
     </div>
 
     <!-- Firebase SDK -->
@@ -847,11 +1114,9 @@
         };
 
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
-        // DOM elements
         const gate = document.getElementById('gate');
         const content = document.getElementById('content');
         const emailInput = document.getElementById('emailInput');
@@ -860,15 +1125,12 @@
         const gateError = document.getElementById('gateError');
         const userEmailDisplay = document.getElementById('userEmail');
 
-        // Auth state listener
         auth.onAuthStateChanged((user) => {
             if (user) {
-                // User is signed in
                 gate.classList.add('hidden');
                 content.classList.add('visible');
                 userEmailDisplay.textContent = user.email;
             } else {
-                // User is signed out
                 gate.classList.remove('hidden');
                 content.classList.remove('visible');
                 userEmailDisplay.textContent = '';
@@ -878,19 +1140,10 @@
         function login() {
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
-
-            if (!email || !password) {
-                showError('Please enter both email and password.');
-                return;
-            }
-
+            if (!email || !password) { showError('Please enter both email and password.'); return; }
             setLoading(true);
-
             auth.signInWithEmailAndPassword(email, password)
-                .then(() => {
-                    // Success — handled by onAuthStateChanged
-                    setLoading(false);
-                })
+                .then(() => { setLoading(false); })
                 .catch((error) => {
                     setLoading(false);
                     let message = 'Login failed. Please try again.';
@@ -903,36 +1156,15 @@
                 });
         }
 
-        function logout() {
-            auth.signOut().catch((error) => {
-                console.error('Logout error:', error);
-            });
-        }
-
-        function showError(msg) {
-            gateError.textContent = msg;
-            gateError.classList.add('show');
-        }
-
+        function logout() { auth.signOut(); }
+        function showError(msg) { gateError.textContent = msg; gateError.classList.add('show'); }
         function setLoading(isLoading) {
-            if (isLoading) {
-                loginBtn.disabled = true;
-                loginBtn.innerHTML = '<span class="spinner"></span>Verifying...';
-            } else {
-                loginBtn.disabled = false;
-                loginBtn.textContent = 'Access Documents';
-            }
+            if (isLoading) { loginBtn.disabled = true; loginBtn.innerHTML = '<span class="spinner"></span>Verifying...'; }
+            else { loginBtn.disabled = false; loginBtn.textContent = 'Access Documents'; }
         }
+        passwordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
+        emailInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
 
-        // Allow Enter key to submit
-        passwordInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') login();
-        });
-        emailInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') login();
-        });
-
-        // Tab switching
         function switchTab(btn, panelId) {
             const card = btn.closest('.card-body');
             card.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -940,6 +1172,102 @@
             btn.classList.add('active');
             document.getElementById(panelId).classList.add('active');
         }
+
+        // ============================================================
+        // CAROUSEL LOGIC
+        // ============================================================
+        const carousels = {};
+
+        function initCarousels() {
+            document.querySelectorAll('.photo-carousel').forEach(el => {
+                const id = el.dataset.carousel;
+                const images = el.querySelectorAll('.carousel-main img');
+                const thumbs = el.querySelectorAll('.carousel-thumb');
+                const counter = el.querySelector('.carousel-counter');
+                carousels[id] = { images, thumbs, counter, current: 0, total: images.length };
+            });
+        }
+
+        function updateCarousel(id) {
+            const c = carousels[id];
+            c.images.forEach((img, i) => img.classList.toggle('active', i === c.current));
+            c.thumbs.forEach((thumb, i) => thumb.classList.toggle('active', i === c.current));
+            c.counter.textContent = (c.current + 1) + ' / ' + c.total;
+            // Scroll active thumb into view
+            const activeThumb = c.thumbs[c.current];
+            if (activeThumb) {
+                activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+        }
+
+        function carouselNext(id) {
+            const c = carousels[id];
+            c.current = (c.current + 1) % c.total;
+            updateCarousel(id);
+        }
+
+        function carouselPrev(id) {
+            const c = carousels[id];
+            c.current = (c.current - 1 + c.total) % c.total;
+            updateCarousel(id);
+        }
+
+        function carouselGoTo(id, index) {
+            carousels[id].current = index;
+            updateCarousel(id);
+        }
+
+        // Fullscreen
+        let fsCarouselId = null;
+        const fsOverlay = document.getElementById('fsOverlay');
+        const fsImage = document.getElementById('fsImage');
+        const fsCounter = document.getElementById('fsCounter');
+
+        function openFullscreen(id) {
+            fsCarouselId = id;
+            updateFullscreen();
+            fsOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateFullscreen() {
+            const c = carousels[fsCarouselId];
+            const src = c.images[c.current].src;
+            fsImage.src = src;
+            fsCounter.textContent = (c.current + 1) + ' / ' + c.total;
+        }
+
+        function closeFullscreen(e) {
+            if (e && e.target !== fsOverlay && !e.target.classList.contains('fs-close')) return;
+            fsOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            fsCarouselId = null;
+        }
+
+        function fsNext(e) {
+            e.stopPropagation();
+            if (!fsCarouselId) return;
+            carouselNext(fsCarouselId);
+            updateFullscreen();
+        }
+
+        function fsPrev(e) {
+            e.stopPropagation();
+            if (!fsCarouselId) return;
+            carouselPrev(fsCarouselId);
+            updateFullscreen();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!fsCarouselId) return;
+            if (e.key === 'Escape') closeFullscreen();
+            if (e.key === 'ArrowRight') { carouselNext(fsCarouselId); updateFullscreen(); }
+            if (e.key === 'ArrowLeft') { carouselPrev(fsCarouselId); updateFullscreen(); }
+        });
+
+        // Initialize on load
+        initCarousels();
     </script>
 </body>
 
