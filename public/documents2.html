@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9H Aviation — Confidential Aircraft Documentation</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a1628;
+            --navy-light: #111d32;
+            --navy-lighter: #1a2744;
+            --accent: #c9a227;
+            --accent-hover: #d4b43a;
+            --text: #e8ecf1;
+            --text-muted: #8a95a8;
+            --border: #253551;
+            --success: #2d8a4e;
+            --error: #c0392b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--navy);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Auth Gate */
+        #gate {
+            position: fixed;
+            inset: 0;
+            background: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #gate.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .gate-box {
+            background: var(--navy-light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 48px 40px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .gate-box .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .gate-box .subtitle {
+            color: var(--text-muted);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+        }
+
+        .gate-box input {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--navy-lighter);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 12px;
+        }
+
+        .gate-box input:focus {
+            border-color: var(--accent);
+        }
+
+        .gate-box input::placeholder {
+            color: #4a5568;
+        }
+
+        .gate-box button {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent);
+            color: var(--navy);
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 4px;
+        }
+
+        .gate-box button:hover {
+            background: var(--accent-hover);
+        }
+
+        .gate-box button:active {
+            transform: scale(0.98);
+        }
+
+        .gate-box button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .gate-error {
+            color: var(--error);
+            font-size: 13px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .gate-error.show {
+            display: block;
+        }
+
+        .gate-hint {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--navy);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Main Content */
+        #content {
+            display: none;
+        }
+
+        #content.visible {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            background: var(--navy-light);
+            border-bottom: 1px solid var(--border);
+            padding: 24px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        .brand span {
+            color: var(--text);
+            font-weight: 300;
+            font-size: 14px;
+            margin-left: 12px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-email {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 24px 32px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 16px;
+            max-width: 600px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        .disclaimer {
+            max-width: 1200px;
+            margin: 0 auto 24px;
+            padding: 16px 24px;
+            background: rgba(201, 162, 39, 0.05);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 10px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* Aircraft Cards */
+        .aircraft-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+            gap: 24px;
+        }
+
+        @media (max-width: 600px) {
+            .aircraft-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .aircraft-card {
+            background: var(--navy-light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .aircraft-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            background: var(--navy-lighter);
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .card-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        .card-title .msn {
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .card-title .specs {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .status-badge {
+            background: rgba(201, 162, 39, 0.12);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .tab {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            color: var(--text);
+        }
+
+        .tab.active {
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--accent);
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* File List */
+        .file-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            background: var(--navy);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .file-item:hover {
+            border-color: var(--accent);
+            background: var(--navy-lighter);
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(201, 162, 39, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .file-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .file-name {
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .file-action {
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        footer {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-muted);
+            font-size: 12px;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+    </style>
+    <base target="_blank">
+</head>
+
+<body>
+
+    <!-- AUTH GATE -->
+    <div id="gate">
+        <div class="gate-box">
+            <div class="logo">9H AVIATION</div>
+            <div class="subtitle">Confidential Documentation Portal</div>
+            <input type="email" id="emailInput" placeholder="Email address" autocomplete="email">
+            <input type="password" id="passwordInput" placeholder="Password" autocomplete="current-password">
+            <button id="loginBtn" onclick="login()">Access Documents</button>
+            <div class="gate-error" id="gateError"></div>
+            <div class="gate-hint">
+                Authorized prospective buyers only.<br>
+                Contact <a href="mailto:info@9haviation.com"
+                    style="color:var(--accent);text-decoration:none;">info@9haviation.com</a> for credentials.
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="content">
+        <header>
+            <div class="header-inner">
+                <div class="brand">9H <span>Confidential Docs</span></div>
+                <div class="header-right">
+                    <span class="user-email" id="userEmail"></span>
+                    <button class="logout-btn" onclick="logout()">Log Out</button>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero">
+            <h1>Aircraft Documentation</h1>
+            <p>Technical and commercial files for prospective buyers. All documents are provided in confidence and
+                subject to NDA terms where applicable.</p>
+        </section>
+
+        <div class="container">
+            <div class="disclaimer">
+                <strong>Confidential —</strong> The documents contained herein are proprietary and confidential.
+                Distribution or reproduction without express written consent of 9H Aviation is strictly prohibited.
+            </div>
+
+            <div class="aircraft-grid">
+
+                <!-- AIRCRAFT 1 -->
+                <div class="aircraft-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h2>De Havilland DHC-6-400 Twin Otter</h2>
+                            <div class="msn">MSN 925</div>
+                            <div class="specs">2015 &nbsp;•&nbsp; TTSN 59 &nbsp;•&nbsp; PT6A-34 &nbsp;•&nbsp; 19 PAX
+                            </div>
+                        </div>
+                        <div class="status-badge">For Sale</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tabs">
+                            <button class="tab active" onclick="switchTab(this, 'ac1-tech')">Technical</button>
+                            <button class="tab" onclick="switchTab(this, 'ac1-commercial')">Commercial</button>
+                        </div>
+
+                        <div id="ac1-tech" class="tab-panel active">
+                            <div class="file-list">
+                                <a href="files/msn925/Type_Certificate.pdf" class="file-item" download>
+                                    <div class="file-icon">📄</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Type Certificate & Specifications</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; EASA / Transport Malta</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Maintenance_Status.pdf" class="file-item" download>
+                                    <div class="file-icon">🔧</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Maintenance Status Report</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Last updated: Aug 2026</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Engine_Logs.pdf" class="file-item" download>
+                                    <div class="file-icon">⚙️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Engine & APU Log Summaries</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; PT6A-34 / Honeywell</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Avionics_List.pdf" class="file-item" download>
+                                    <div class="file-icon">📡</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Avionics Configuration</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Honeywell Suite</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Weight_Balance.pdf" class="file-item" download>
+                                    <div class="file-icon">⚖️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Weight & Balance Report</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Current W&B</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Interior_Photos.zip" class="file-item" download>
+                                    <div class="file-icon">🖼️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">High-Res Interior Photos</div>
+                                        <div class="file-meta">ZIP &nbsp;•&nbsp; 24 images</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Exterior_Photos.zip" class="file-item" download>
+                                    <div class="file-icon">🖼️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">High-Res Exterior Photos</div>
+                                        <div class="file-meta">ZIP &nbsp;•&nbsp; 36 images</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="ac1-commercial" class="tab-panel">
+                            <div class="file-list">
+                                <a href="files/msn925/Spec_Sheet.pdf" class="file-item" download>
+                                    <div class="file-icon">📋</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Aircraft Specification Sheet</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Overview & key figures</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Operating_Costs.pdf" class="file-item" download>
+                                    <div class="file-icon">💶</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Estimated Operating Costs</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Annual projection</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Lease_Sample.pdf" class="file-item" download>
+                                    <div class="file-icon">📑</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Sample Lease Agreement</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Redacted template</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn925/Insurance_Summary.pdf" class="file-item" download>
+                                    <div class="file-icon">🛡️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Insurance & Liability Summary</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Coverage overview</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AIRCRAFT 2 -->
+                <div class="aircraft-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h2>De Havilland DHC-6-400 Twin Otter</h2>
+                            <div class="msn">MSN 938</div>
+                            <div class="specs">2015 &nbsp;•&nbsp; TTSN 27 &nbsp;•&nbsp; PT6A-34 &nbsp;•&nbsp; 19 PAX
+                            </div>
+                        </div>
+                        <div class="status-badge">For Sale</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tabs">
+                            <button class="tab active" onclick="switchTab(this, 'ac2-tech')">Technical</button>
+                            <button class="tab" onclick="switchTab(this, 'ac2-commercial')">Commercial</button>
+                        </div>
+
+                        <div id="ac2-tech" class="tab-panel active">
+                            <div class="file-list">
+                                <a href="files/msn938/Type_Certificate.pdf" class="file-item" download>
+                                    <div class="file-icon">📄</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Type Certificate & Specifications</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; EASA / Transport Malta</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Maintenance_Status.pdf" class="file-item" download>
+                                    <div class="file-icon">🔧</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Maintenance Status Report</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Last updated: Aug 2026</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Engine_Logs.pdf" class="file-item" download>
+                                    <div class="file-icon">⚙️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Engine & APU Log Summaries</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; PT6A-34 / Honeywell</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Avionics_List.pdf" class="file-item" download>
+                                    <div class="file-icon">📡</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Avionics Configuration</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Honeywell Suite</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Weight_Balance.pdf" class="file-item" download>
+                                    <div class="file-icon">⚖️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Weight & Balance Report</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Current W&B</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Interior_Photos.zip" class="file-item" download>
+                                    <div class="file-icon">🖼️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">High-Res Interior Photos</div>
+                                        <div class="file-meta">ZIP &nbsp;•&nbsp; 24 images</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Exterior_Photos.zip" class="file-item" download>
+                                    <div class="file-icon">🖼️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">High-Res Exterior Photos</div>
+                                        <div class="file-meta">ZIP &nbsp;•&nbsp; 36 images</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="ac2-commercial" class="tab-panel">
+                            <div class="file-list">
+                                <a href="files/msn938/Spec_Sheet.pdf" class="file-item" download>
+                                    <div class="file-icon">📋</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Aircraft Specification Sheet</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Overview & key figures</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Operating_Costs.pdf" class="file-item" download>
+                                    <div class="file-icon">💶</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Estimated Operating Costs</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Annual projection</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Lease_Sample.pdf" class="file-item" download>
+                                    <div class="file-icon">📑</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Sample Lease Agreement</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Redacted template</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                                <a href="files/msn938/Insurance_Summary.pdf" class="file-item" download>
+                                    <div class="file-icon">🛡️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">Insurance & Liability Summary</div>
+                                        <div class="file-meta">PDF &nbsp;•&nbsp; Coverage overview</div>
+                                    </div>
+                                    <div class="file-action">Download</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer>
+            © 2026 9H Aviation Ltd. — All rights reserved. Documents provided in strict confidence.<br>
+            For inquiries: <a href="mailto:info@9haviation.com"
+                style="color: var(--accent); text-decoration: none;">info@9haviation.com</a>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+    <script>
+        // ============================================================
+        // FIREBASE CONFIGURATION
+        // ============================================================
+        // 1. Go to https://console.firebase.google.com/
+        // 2. Create a new project (e.g., "9H-Aviation-Docs")
+        // 3. Add a Web App (</> icon) — copy the firebaseConfig object
+        // 4. Enable Email/Password provider:
+        //    Authentication → Sign-in method → Email/Password → Enable
+        // 5. Create users manually in:
+        //    Authentication → Users → Add user
+        //    (Or let buyers self-register and approve them)
+        // 6. Replace the placeholder config below with yours
+        // ============================================================
+
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // DOM elements
+        const gate = document.getElementById('gate');
+        const content = document.getElementById('content');
+        const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const loginBtn = document.getElementById('loginBtn');
+        const gateError = document.getElementById('gateError');
+        const userEmailDisplay = document.getElementById('userEmail');
+
+        // Auth state listener
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in
+                gate.classList.add('hidden');
+                content.classList.add('visible');
+                userEmailDisplay.textContent = user.email;
+            } else {
+                // User is signed out
+                gate.classList.remove('hidden');
+                content.classList.remove('visible');
+                userEmailDisplay.textContent = '';
+            }
+        });
+
+        function login() {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!email || !password) {
+                showError('Please enter both email and password.');
+                return;
+            }
+
+            setLoading(true);
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    // Success — handled by onAuthStateChanged
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    setLoading(false);
+                    let message = 'Login failed. Please try again.';
+                    if (error.code === 'auth/user-not-found') message = 'No account found with this email.';
+                    if (error.code === 'auth/wrong-password') message = 'Incorrect password.';
+                    if (error.code === 'auth/invalid-email') message = 'Please enter a valid email address.';
+                    if (error.code === 'auth/too-many-requests') message = 'Too many attempts. Please try again later.';
+                    if (error.code === 'auth/invalid-credential') message = 'Invalid email or password.';
+                    showError(message);
+                });
+        }
+
+        function logout() {
+            auth.signOut().catch((error) => {
+                console.error('Logout error:', error);
+            });
+        }
+
+        function showError(msg) {
+            gateError.textContent = msg;
+            gateError.classList.add('show');
+        }
+
+        function setLoading(isLoading) {
+            if (isLoading) {
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<span class="spinner"></span>Verifying...';
+            } else {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Access Documents';
+            }
+        }
+
+        // Allow Enter key to submit
+        passwordInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') login();
+        });
+        emailInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') login();
+        });
+
+        // Tab switching
+        function switchTab(btn, panelId) {
+            const card = btn.closest('.card-body');
+            card.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            card.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(panelId).classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
