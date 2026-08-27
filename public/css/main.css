@@ -102,6 +102,53 @@ header {
     padding: 20px;
 }
 
+.uav-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #38bdf8;
+    /* bright sky/cyan — drone/tech feel */
+    padding: 8px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.uav-badge .uav-label span {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.uav-badge .uav-icon {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.uav-badge .uav-arrow {
+    margin-left: 2px;
+    opacity: 0.6;
+    transition: transform 0.2s ease;
+}
+
+.uav-badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.25);
+    border-color: rgba(56, 189, 248, 0.6);
+}
+
+.uav-badge:hover .uav-arrow {
+    transform: translateX(3px);
+    opacity: 1;
+}
+
 /* Collaboration section styles */
 .collaboration {
     display: flex;

@@ -1297,14 +1297,14 @@
         // ============================================================
         // FIREBASE CONFIGURATION
         // ============================================================
+        // Load config from environment (Vite/webpack will inject at build time)
         const firebaseConfig = {
-            apiKey: "AIzaSyDT8Dq2AXAlHYNUfXOP324wt0b1zoNXoPw",
-            authDomain: "nine-h-aviation.firebaseapp.com",
-            projectId: "nine-h-aviation",
-            storageBucket: "nine-h-aviation.firebasestorage.app",
-            messagingSenderId: "344438972950",
-            appId: "1:344438972950:web:e488b671637f977babcb37",
-            measurementId: "G-2877M106T7"
+            apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+            authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+            projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+            storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+            messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+            appId: import.meta.env.VITE_FIREBASE_APP_ID
         };
 
         firebase.initializeApp(firebaseConfig);
