@@ -95,59 +95,109 @@ header {
     transition: all 0.3s ease;
 }
 
+/* --- Header layout --- */
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 32px;
     padding: 20px;
 }
 
-.uav-badge {
+/* --- Ecosystem link group: sits between logo and nav, visually quiet --- */
+.utility-bar {
+    background: #1a1a1a;
+    /* dark grey from your palette */
+    color: #fff;
+    font-size: 0.78rem;
+}
+
+.utility-inner {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    padding: 8px 20px;
+}
+
+.utility-bar a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.utility-bar a:hover {
+    color: #fff;
+}
+
+.utility-bar a::after {
+    content: " →";
+    color: #c8102e;
+}
+
+
+.ecosystem-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    /* push group toward the nav */
+    margin-right: 32px;
+    padding: 4px;
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.04);
+    /* barely-there grouping */
+    border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+/* --- Individual links: ghost style, inherit text color --- */
+.eco-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: #38bdf8;
-    /* bright sky/cyan — drone/tech feel */
-    padding: 8px 16px;
-    border-radius: 50px;
+    padding: 6px 12px;
+    border-radius: 7px;
     text-decoration: none;
+    color: inherit;
+    /* matches your header text color */
     font-family: 'Segoe UI', system-ui, sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    transition: all 0.2s ease;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
     white-space: nowrap;
+    transition: background-color 0.18s ease, color 0.18s ease;
 }
 
-.uav-badge .uav-label span {
-    color: #ffffff;
+.eco-label em {
+    font-style: normal;
     font-weight: 700;
+    color: #0ea5e9;
+    /* single accent, only on the noun */
 }
 
-.uav-badge .uav-icon {
-    font-size: 1rem;
-    opacity: 0.9;
+.eco-arrow {
+    font-size: 0.85em;
+    opacity: 0.4;
+    transform: translateX(0);
+    transition: transform 0.18s ease, opacity 0.18s ease;
 }
 
-.uav-badge .uav-arrow {
-    margin-left: 2px;
-    opacity: 0.6;
-    transition: transform 0.2s ease;
+/* --- Hover: subtle fill, arrow slides --- */
+.eco-link:hover {
+    background: rgba(14, 165, 233, 0.08);
+    color: #0f172a;
 }
 
-.uav-badge:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.25);
-    border-color: rgba(56, 189, 248, 0.6);
-}
-
-.uav-badge:hover .uav-arrow {
+.eco-link:hover .eco-arrow {
     transform: translateX(3px);
     opacity: 1;
 }
+
+.eco-link:focus-visible {
+    outline: 2px solid #0ea5e9;
+    outline-offset: 2px;
+}
+
+
 
 /* Collaboration section styles */
 .collaboration {
